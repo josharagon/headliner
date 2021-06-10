@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { getSearchResults } from '../../api';
 import './App.css';
 
 function App() {
+
+const [filter, setFilter] = useState('home')
+const [results, setResults] = useState([])
+const [error, setError] = useState('initialState')
+
+
+  useEffect(() => {
+    let mounted = true;
+    getSearchResults(filter)
+    .then(res => {
+      if(mounted) {
+        setResults(res.results)
+      }
+    })
+    console.log(results)
+    return () => mounted = false;
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <p>results</p>
   );
 }
 
