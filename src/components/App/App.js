@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSearchResults } from '../../api';
+import CardHolder from '../CardHolder/CardHolder';
 import './App.css';
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
 const [filter, setFilter] = useState('home')
 const [results, setResults] = useState([])
 const [mounted, setMounted] = useState(true)
-const [error, setError] = useState('initialState')
+const [error, setError] = useState('')
 
 
   useEffect(() => {
@@ -16,12 +17,13 @@ const [error, setError] = useState('initialState')
     .then(res => {
         setResults(res.results)
     })
+    .catch(err => setError(err))
   }
     setMounted(false);
   })
 
   return (
-    <p>results</p>
+    <CardHolder results={results} error={error}/>
   );
 }
 
