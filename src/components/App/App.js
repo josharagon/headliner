@@ -6,19 +6,18 @@ function App() {
 
 const [filter, setFilter] = useState('home')
 const [results, setResults] = useState([])
+const [mounted, setMounted] = useState(true)
 const [error, setError] = useState('initialState')
 
 
   useEffect(() => {
-    let mounted = true;
+    if(mounted) {
     getSearchResults(filter)
     .then(res => {
-      if(mounted) {
         setResults(res.results)
-      }
     })
-    console.log(results)
-    return () => mounted = false;
+  }
+    setMounted(false);
   })
 
   return (
