@@ -1,0 +1,23 @@
+.single-story-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-caption {
+  font-size: 1.50vh;
+}
+
+.img-container {
+  place-self: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10vh;
+}
+.story-img {
+  height: 35vh;
+  box-shadow: 0 1px 9px 0 rgb(0 0 0 / 45%);
+}
+
+.link {
+  text-align: center;
+}

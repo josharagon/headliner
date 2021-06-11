@@ -1,0 +1,9 @@
+.dropdown {
+  text-align: center;
+}
+
+.search-button {
+  border: none;
+  margin: 0 0 0 5px;
+  border-radius: 6px;
+}

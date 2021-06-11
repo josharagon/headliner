@@ -1,29 +1,54 @@
 import { useState, useEffect } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 import { getSearchResults } from '../../api';
-import CardHolder from '../CardHolder/CardHolder';
+import FilterButtons from '../FilterButtons/FilterButtons.js'
+import CardHolder from '../CardHolder/CardHolder.js';
+import SingleStoryView from '../SingleStoryView/SingleStoryView.js'
 import './App.css';
 
 function App() {
 
-const [filter, setFilter] = useState('home')
-const [results, setResults] = useState([])
-const [mounted, setMounted] = useState(true)
-const [error, setError] = useState('')
+  const [filter, setFilter] = useState('home')
+  const [results, setResults] = useState([])
+  const [mounted, setMounted] = useState(true)
+  const [error, setError] = useState('')
+  const [currentStory, setCurrentStory] = useState(null)
+  const [locked, setLocked] = useState(true)
 
+  const getCategoryResults = (term) => {
+    getSearchResults(term)
+      .then(res => {
+        setResults(res.results)
+      })
+      .catch(err => setError(err))
+  }
 
   useEffect(() => {
-    if(mounted) {
-    getSearchResults(filter)
-    .then(res => {
-        setResults(res.results)
-    })
-    .catch(err => setError(err))
-  }
+    if (mounted) {
+      getCategoryResults(filter);
+    }
     setMounted(false);
-  })
+  }, [mounted, filter])
 
   return (
-    <CardHolder results={results} error={error}/>
+    <>
+      <Link to='/'>
+        <h1 className='header'>Headliner</h1>
+      </Link>
+      <Switch>
+        <Route exact path='/' render={() => {
+          return (
+            <>
+              <FilterButtons filter={filter} setFilter={setFilter} getCategoryResults={getCategoryResults} locked={locked} setLocked={setLocked} />
+              <CardHolder results={results} error={error} setCurrentStory={setCurrentStory}/>
+            </>
+          )
+        }} />
+        <Route exact path='/story/:id' render={({ match }) =>
+          <SingleStoryView time={match.params.id} story={currentStory}/>
+        } />
+      </Switch>
+    </>
   );
 }
 

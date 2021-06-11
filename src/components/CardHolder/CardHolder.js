@@ -1,21 +1,16 @@
 import './CardHolder.css';
-import { Link } from 'react-router-dom';
+import StoryCard from '../StoryCard/StoryCard.js'
 
-const CardHolder = ({ results, error }) => {
+const CardHolder = ({ results, error, setCurrentStory }) => {
 let allResults;
   if (results) {
     allResults = results.map(result => {
-      return <p>{result.abstract}</p>
-      // return <StoryCard repo={result} key={result.full_name} />
+      return <StoryCard key={result.title} article={result} setCurrentStory={setCurrentStory}/>
     })
   }
 
-
   return (
     <>
-      <Link to='/'>
-        <h1 className='header'>Headerliner</h1>
-      </Link>
       <div className='card-container'>
         {allResults}
         {!allResults.length && !error && <h1 className='error-loading'>Loading</h1>}
