@@ -1,12 +1,12 @@
 import './CardHolder.css';
 import { Link } from 'react-router-dom';
+import StoryCard from '../StoryCard/StoryCard.js'
 
 const CardHolder = ({ results, error }) => {
 let allResults;
   if (results) {
     allResults = results.map(result => {
-      return <p>{result.abstract}</p>
-      // return <StoryCard repo={result} key={result.full_name} />
+      return <StoryCard key={result.title} article={result} />
     })
   }
 
