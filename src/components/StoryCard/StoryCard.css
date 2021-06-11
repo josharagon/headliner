@@ -15,6 +15,7 @@
   padding: 10px;
   transition: 1s;
   cursor: pointer;
+  text-shadow: 0 1px black;
 }
 
 .section {

@@ -1,29 +1,36 @@
 import { useState, useEffect } from 'react';
 import { getSearchResults } from '../../api';
+import FilterButtons from '../FilterButtons/FilterButtons.js'
 import CardHolder from '../CardHolder/CardHolder';
 import './App.css';
 
 function App() {
 
-const [filter, setFilter] = useState('home')
-const [results, setResults] = useState([])
-const [mounted, setMounted] = useState(true)
-const [error, setError] = useState('')
+  const [filter, setFilter] = useState('home')
+  const [results, setResults] = useState([])
+  const [mounted, setMounted] = useState(true)
+  const [error, setError] = useState('')
 
-
-  useEffect(() => {
-    if(mounted) {
-    getSearchResults(filter)
+  const getCategoryResults = (term) => {
+    getSearchResults(term)
     .then(res => {
-        setResults(res.results)
+      setResults(res.results)
     })
     .catch(err => setError(err))
   }
+
+  useEffect(() => {
+    if (mounted) {
+      getCategoryResults(filter);
+    }
     setMounted(false);
-  })
+  }, [mounted, filter])
 
   return (
-    <CardHolder results={results} error={error}/>
+    <>
+      <FilterButtons filter={filter} setFilter={setFilter} getCategoryResults={getCategoryResults}/>
+      <CardHolder results={results} error={error} />
+    </>
   );
 }
 
