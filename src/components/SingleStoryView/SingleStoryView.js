@@ -12,8 +12,9 @@ const SingleStoryView = ({ story }) => {
       <h1>{story.title}</h1>
       <p className='story-byline'>{story.byline}</p>
       <h3>{story.abstract}</h3>
+      <a className='link' target='_blank' rel='noopener noreferrer' href={story.url}>View Story On NY Times</a>
       <div className='img-container'>
-      <img src={story.multimedia ? story.multimedia[0].url : null} className='story-img' alt={story.multimedia[0].caption}></img>
+      <img src={story.multimedia ? story.multimedia[0].url : null} className='story-img' alt={story.multimedia ? story.multimedia[0].caption : ''}></img>
       <p className='img-caption'>{story.multimedia ? story.multimedia[0].caption : null} </p>
       </div>
     </div> 

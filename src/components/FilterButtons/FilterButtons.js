@@ -1,4 +1,4 @@
-
+import './FilterButtons.css'
 
 const FilterButtons = ({ filter, setFilter, getCategoryResults }) => {
   
