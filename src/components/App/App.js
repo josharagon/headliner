@@ -13,6 +13,7 @@ function App() {
   const [mounted, setMounted] = useState(true)
   const [error, setError] = useState('')
   const [currentStory, setCurrentStory] = useState(null)
+  const [locked, setLocked] = useState(true)
 
   const getCategoryResults = (term) => {
     getSearchResults(term)
@@ -38,7 +39,7 @@ function App() {
         <Route exact path='/' render={() => {
           return (
             <>
-              <FilterButtons filter={filter} setFilter={setFilter} getCategoryResults={getCategoryResults} />
+              <FilterButtons filter={filter} setFilter={setFilter} getCategoryResults={getCategoryResults} locked={locked} setLocked={setLocked} />
               <CardHolder results={results} error={error} setCurrentStory={setCurrentStory}/>
             </>
           )

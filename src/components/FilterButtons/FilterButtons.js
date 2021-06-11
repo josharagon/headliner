@@ -37,10 +37,10 @@ const FilterButtons = ({ filter, setFilter, getCategoryResults }) => {
         <option  value='us'>us</option>
         <option  value='world'>world</option>
       </select>
-      <button onClick={(e) => {
+      <button className='search-button' onClick={(e) => {
         e.preventDefault()
         getCategoryResults(filter)
-      }}>Search</button>
+      }}>search</button>
     </form>
   )
 }
